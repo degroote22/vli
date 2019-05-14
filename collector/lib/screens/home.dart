@@ -105,14 +105,23 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.only(top: 16, bottom: 64),
               child: Container(
                 constraints: BoxConstraints(maxWidth: 640),
-                child: ListView(
-                  shrinkWrap: true,
-                  children: sorted
-                      .map((id) => ItemButton(
-                            identity: id,
-                          ))
-                      .toList(),
-                ),
+                child: sorted.isEmpty
+                    ? Center(
+                        child: Text(
+                          'Nenhuma loja cadastrada',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    : ListView(
+                        shrinkWrap: true,
+                        children: sorted
+                            .map((id) => ItemButton(
+                                  identity: id,
+                                ))
+                            .toList(),
+                      ),
               )),
         );
       },

@@ -25,66 +25,75 @@ class StorePage extends StatelessWidget {
           padding: EdgeInsets.only(top: 16),
           child: Container(
             constraints: BoxConstraints(maxWidth: 640),
-            child: ListView(
-              children: identity.items.map((item) {
-                return Container(
-                  margin: EdgeInsets.only(bottom: 8),
-                  child: Card(
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          leading: Icon(Icons.star),
-                          title: Text(item.name),
-                          subtitle: Text(item.price +
-                              "\n" +
-                              item.sold.toString() +
-                              " itens vendidos"),
-                          isThreeLine: true,
-                        ),
-                        Divider(height: 0),
-                        ButtonTheme.bar(
-                          minWidth: double.infinity,
-                          height: 48,
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddSalePage(
-                                        identity: identity,
-                                        item: item,
-                                      ),
-                                ),
-                              );
-                            },
-                            child: Text('ADICIONAR VENDA'),
-                          ),
-                        ),
-                        Divider(height: 0),
-                        ButtonTheme.bar(
-                          minWidth: double.infinity,
-                          height: 48,
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SeeSalesPage(
-                                        item: item,
-                                        identity: identity,
-                                      ),
-                                ),
-                              );
-                            },
-                            child: Text('VER HISTÓRICO'),
-                          ),
-                        ),
-                      ],
+            child: identity.items.isEmpty
+                ? Center(
+                    child: Text(
+                      'Nenhuma produto cadastrado',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
+                  )
+                : ListView(
+                    children: identity.items.map((item) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 8),
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                leading: Icon(Icons.star),
+                                title: Text(item.name),
+                                subtitle: Text(item.price +
+                                    "\n" +
+                                    item.sold.toString() +
+                                    " itens vendidos"),
+                                isThreeLine: true,
+                              ),
+                              Divider(height: 0),
+                              ButtonTheme.bar(
+                                minWidth: double.infinity,
+                                height: 48,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddSalePage(
+                                              identity: identity,
+                                              item: item,
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('ADICIONAR VENDA'),
+                                ),
+                              ),
+                              Divider(height: 0),
+                              ButtonTheme.bar(
+                                minWidth: double.infinity,
+                                height: 48,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SeeSalesPage(
+                                              item: item,
+                                              identity: identity,
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('VER HISTÓRICO'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
-                );
-              }).toList(),
-            ),
           ),
         ),
       );

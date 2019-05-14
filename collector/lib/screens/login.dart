@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Cadastrar em uma loja"),
+          title: Text("Cadastrar loja"),
         ),
         body: Container(
           alignment: Alignment.topCenter,
