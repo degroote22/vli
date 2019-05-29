@@ -8,7 +8,6 @@ environment:
 dependencies:
   flutter_web: any
   flutter_web_ui: any
-  js: any
   uuid: ^2.0.1
   dartz: ^0.8.4
 
