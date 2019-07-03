@@ -1,0 +1,128 @@
+interface SaleHistory {
+  _id: String!
+  when: String!
+  userGeneratedId: String!
+}
+
+type SalePutHistory implements SaleHistory {
+  _id: String!
+  when: String!
+  userGeneratedId: String!
+
+  ammount: Int!
+  longitude: Float!
+  latitude: Float!
+}
+
+type SaleRemoveHistory implements SaleHistory {
+  _id: String!
+  when: String!
+  userGeneratedId: String!
+
+  removedId: String!
+}
+
+type ItemForSale {
+  _id: String!
+  name: String!
+  price: String!
+  history: [SaleHistory!]!
+  owner: Account!
+  contracts: [SaleContract!]!
+}
+
+type SaleContract {
+  _id: String!
+  seller: Identity!
+  selling: ItemForSale!
+  history: [SaleHistory!]!
+  ammount: Int!
+}
+
+type Account {
+  _id: String!
+  name: String!
+  email: String!
+  hash: String!
+  items: [ItemForSale!]!
+  identities: [Identity!]!
+}
+
+type Identity {
+  _id: String!
+  name: String!
+  sellerName: String!
+  active: Boolean!
+  contracts: [SaleContract!]!
+  owner: Account!
+}
+
+input RegisterIdentityInput {
+  name: String!
+  sellerName: String!
+}
+
+input ContractInput {
+  sellingId: String!
+  ammount: Int!
+}
+
+input RegisterContractToIdentityInput {
+  identityId: String!
+  contract: ContractInput!
+}
+
+input RegisterItemInput {
+  name: String!
+  price: String!
+}
+
+input RegisterAccountInput {
+  name: String!
+  email: String!
+  password: String!
+}
+input SalePutHistoryInput {
+  contractId: String!
+
+  when: String!
+  userGeneratedId: String!
+
+  ammount: Int!
+  longitude: Float!
+  latitude: Float!
+}
+input SaleRemoveHistoryInput {
+  contractId: String!
+
+  when: String!
+  userGeneratedId: String!
+
+  removedId: String!
+}
+
+type Query {
+  identityById(id: String!): Identity
+  accountById(id: String!): Account
+}
+
+type Mutation {
+  authenticateAccount(email: String!, password: String!): String
+
+  registerIdentity(input: RegisterIdentityInput!): Identity
+  registerContractToIdentity(input: RegisterContractToIdentityInput!): Identity
+  registerItem(input: RegisterItemInput!): ItemForSale
+  registerAccount(input: RegisterAccountInput!): Account
+  addSalePutHistory(input: SalePutHistoryInput!): SalePutHistory
+  addSaleRemoveHistory(input: SaleRemoveHistoryInput!): SaleRemoveHistory
+}
+
+type Subscription {
+  salesInItem(itemId: String!): SaleHistory!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
