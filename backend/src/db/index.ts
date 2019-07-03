@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 // mongoose.connect("mongodb://localhost/vli", { useNewUrlParser: true });
 mongoose.connect(
-  "mongodb+srv://dgtdgt:nooneno15@cluster0-l81bf.mongodb.net/test?retryWrites=true&w=majority",
+  "mongodb+srv://dgtdgt:dgtdgt@cluster0-l81bf.mongodb.net/test?retryWrites=true&w=majority",
   { useNewUrlParser: true },
 );
 
